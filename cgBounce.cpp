@@ -11,20 +11,20 @@ void ball(int x, int y){
 
 void box(){
     line(50, 25, 50, 475);
-    line(50, 25, 550, 25);
-    line(550, 25, 550, 475);
+    line(50, 25, 600, 25);
+    line(600, 25, 600, 475);
 }
 
 int main(){
 	int gd=DETECT, gm;
 	initgraph(&gd, &gm, NULL);
 	
-	int i, j, si=1, xbar=100, sbar=1;
+	int i, j, si=1, xbar=300, sbar=1;
 	for(i=300; ; ){
-		for(j=50; j<=450; j++){
+		for(j=449; j>=50; j--){
 			cleardevice();
 			box();
-			if(i+25==550){
+			if(i+25==600){
 			    si=-1;
 			}else if(i-25==50){
                 si=1;			    
@@ -33,24 +33,24 @@ int main(){
 				i+=si;
 			}
 			if(sbar>0){
-			    if(xbar-i <= j){
+			    if(xbar-i <= 400){
 			        xbar+=sbar;
 			    }else
 			        sbar=-1;
 			}else{
-			    if(i-xbar <= j){
+			    if(i-xbar <= 400){
 			        xbar+=sbar;
 			    }else
 			        sbar=1;
 			}
 			ball(i, j);
-			bar(xbar-50, 475, xbar, 485);
-			delay(1);
+			bar(xbar-25, 475, xbar+25, 485);
+			delay(5);
 		}
-		for(j=450; j>=50; j--){
+		for(j=50; j<=449; j++){
 			cleardevice();
 			box();
-			if(i+25==550){
+			if(i+25==600){
 			    si=-1;
 			}else if(i-25==50){
                 si=1;			    
@@ -59,19 +59,19 @@ int main(){
 				i+=si;
 			}
 			if(sbar>0){
-			    if(xbar-i <= j){
+			    if(xbar-i <= 400){
 			        xbar+=sbar;
 			    }else
 			        sbar=-1;
 			}else{
-			    if(i-xbar <= j){
+			    if(i-xbar <= 400){
 			        xbar+=sbar;
 			    }else
 			        sbar=1;
 			}
 			ball(i, j);
-			bar(xbar-50, 475, xbar, 485);
-			delay(1);
+			bar(xbar-25, 475, xbar+25, 485);
+			delay(5);
 		}
 	}
 	
