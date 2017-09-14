@@ -1,5 +1,6 @@
 #include<iostream>
 #include<graphics.h>
+#include<math.h>
 using namespace std;
 
 void ball(int x, int y){
@@ -8,36 +9,72 @@ void ball(int x, int y){
 	floodfill(x, y, YELLOW);
 }
 
+void box(){
+    line(50, 25, 50, 475);
+    line(50, 25, 550, 25);
+    line(550, 25, 550, 475);
+}
+
 int main(){
 	int gd=DETECT, gm;
 	initgraph(&gd, &gm, NULL);
 	
-	int i, j, k=100, d, x=getmaxx(), y=getmaxy();
-	for(i=100; i<x-100;){
-		d=(x-i)/y;
-		if(d<=1)
-			d=1;
-		for(j=y-85; j>50; j--, k+=(2*d)){
+	int i, j, si=1, xbar=100, sbar=1;
+	for(i=300; ; ){
+		for(j=50; j<=450; j++){
 			cleardevice();
-			if(j%10==0)
-				i++;
+			box();
+			if(i+25==550){
+			    si=-1;
+			}else if(i-25==50){
+                si=1;			    
+			}
+			if(j%10==0){
+				i+=si;
+			}
+			if(sbar>0){
+			    if(xbar-i <= j){
+			        xbar+=sbar;
+			    }else
+			        sbar=-1;
+			}else{
+			    if(i-xbar <= j){
+			        xbar+=sbar;
+			    }else
+			        sbar=1;
+			}
 			ball(i, j);
-			bar(k-40, y-60, k+40, y-50);
+			bar(xbar-50, 475, xbar, 485);
 			delay(1);
 		}
-		d=(x-i)/y;
-		if(d<=1)
-			d=1;
-		for(j=50; j<y-85; j++, k-=(2*d)){
+		for(j=450; j>=50; j--){
 			cleardevice();
-			if(j%10==0)
-				i++;
+			box();
+			if(i+25==550){
+			    si=-1;
+			}else if(i-25==50){
+                si=1;			    
+			}
+			if(j%10==0){
+				i+=si;
+			}
+			if(sbar>0){
+			    if(xbar-i <= j){
+			        xbar+=sbar;
+			    }else
+			        sbar=-1;
+			}else{
+			    if(i-xbar <= j){
+			        xbar+=sbar;
+			    }else
+			        sbar=1;
+			}
 			ball(i, j);
-			bar(k-40, y-60, k+40, y-50);
+			bar(xbar-50, 475, xbar, 485);
 			delay(1);
 		}
-		cout<<y<<endl;
 	}
+	
 	getch();
 	closegraph();
 	
